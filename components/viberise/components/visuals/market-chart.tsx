@@ -204,7 +204,7 @@ export function MarketChart({
               color: lineColor,
             },
           }}
-          className="h-[340px] w-full"
+          className="h-[280px] w-full sm:h-[300px] md:h-[320px]"
           // Inline style to inject dynamic CSS var for line color
           style={
             {

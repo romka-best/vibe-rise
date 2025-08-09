@@ -1,5 +1,5 @@
 export const SITE_NAME = "VibeRise"
-export const CONTACT_EMAIL = "me@romandanilov.com"
 
-// Helper for mailto links
+// Single source of truth for contact email
+export const CONTACT_EMAIL = "me@romandanilov.com"
 export const CONTACT_MAILTO = `mailto:${CONTACT_EMAIL}`
