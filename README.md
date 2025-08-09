@@ -1,6 +1,6 @@
 # VibeRise — Modern Landing Page, Built 100% with Prompts in v0
 
-Live production: https://v0-vibe-rise-hx2azfpo3-me-romandanilovs-projects.vercel.app/
+Live production: https://v0-vibe-rise-87wa748gc-me-romandanilovs-projects.vercel.app
 
 VibeRise is a high‑polish, performant landing page crafted entirely via natural language prompts in v0 — Vercel’s AI pair programmer. No hand-written boilerplate, no scaffolding CLIs — just prompts, previews, and deploys. [^4]
 
