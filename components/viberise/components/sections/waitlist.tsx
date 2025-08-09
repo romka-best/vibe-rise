@@ -89,12 +89,6 @@ export function Waitlist({
               <span>{"You're officially on the list"}</span>
             </motion.div>
 
-            <motion.div variants={popIn} className="mt-6 inline-grid place-items-center">
-              <div className="grid h-20 w-20 place-items-center rounded-2xl bg-white/80 text-black shadow-xl ring-2 ring-[rgba(204,255,17,0.55)] backdrop-blur dark:bg-white/10 dark:text-white">
-                <CheckCircle2 className="h-10 w-10 text-[var(--brand)]" />
-              </div>
-            </motion.div>
-
             <motion.h2
               className="mt-6 text-3xl md:text-4xl font-extrabold tracking-tight text-black dark:text-white"
               variants={fadeUp}
@@ -157,17 +151,17 @@ export function Waitlist({
           </div>
         </div>
         <style jsx>{`
+      .vh-center {
+        min-height: calc(100svh - var(--header-h));
+        display: grid;
+        place-items: center;
+      }
+      @supports not (height: 1svh) {
         .vh-center {
-          min-height: calc(100svh - var(--header-h));
-          display: grid;
-          place-items: center;
+          min-height: calc(100dvh - var(--header-h));
         }
-        @supports not (height: 1svh) {
-          .vh-center {
-            min-height: calc(100dvh - var(--header-h));
-          }
-        }
-      `}</style>
+      }
+    `}</style>
       </motion.section>
     )
   }
@@ -319,28 +313,28 @@ export function Waitlist({
       </div>
 
       <style jsx>{`
-      @keyframes shake {
-        0%,
-        100% {
-          transform: translateX(0);
-        }
-        20% {
-          transform: translateX(-4px);
-        }
-        40% {
-          transform: translateX(4px);
-        }
-        60% {
-          transform: translateX(-3px);
-        }
-        80% {
-          transform: translateX(3px);
-        }
+    @keyframes shake {
+      0%,
+      100% {
+        transform: translateX(0);
       }
-      [data-animate="shake"] {
-        animation: shake 0.35s ease-in-out;
+      20% {
+        transform: translateX(-4px);
       }
-    `}</style>
+      40% {
+        transform: translateX(4px);
+      }
+      60% {
+        transform: translateX(-3px);
+      }
+      80% {
+        transform: translateX(3px);
+      }
+    }
+    [data-animate="shake"] {
+      animation: shake 0.35s ease-in-out;
+    }
+  `}</style>
     </motion.section>
   )
 }
