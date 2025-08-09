@@ -40,17 +40,27 @@ export default function NotFound() {
           <p className="mt-4 text-lg text-white/70">{"We couldn’t find that page. Let’s get you back to the rise."}</p>
 
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Link href="/" className="inline-flex">
-              <Button className="bg-[var(--brand)] text-black hover:bg-[color:rgb(204,255,17,0.9)]">
+            <Button
+              asChild
+              size="lg"
+              className="w-full sm:w-auto h-11 rounded-full px-5 bg-[var(--brand)] text-black hover:bg-[color:rgba(204,255,17,0.9)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand)] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+            >
+              <Link href="/" aria-label="Go back to homepage">
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 {"Back Home"}
-              </Button>
-            </Link>
-            <Link href="/#waitlist" className="inline-flex">
-              <Button variant="outline" className="border-white/15 bg-white/5 hover:bg-white/10">
+              </Link>
+            </Button>
+
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="w-full sm:w-auto h-11 rounded-full px-5 border-white/20 text-white bg-white/5 hover:bg-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand)] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+            >
+              <Link href="/#waitlist" aria-label="Jump to waitlist section">
                 {"Join the Rise"}
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
         </div>
       </div>

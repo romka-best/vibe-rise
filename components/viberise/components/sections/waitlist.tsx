@@ -77,11 +77,10 @@ export function Waitlist({
         className="border-t border-black/10 dark:border-white/10 vh-section"
         variants={sectionReveal}
         initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, margin: "-20% 0px" }}
+        animate="show"
       >
         <div className="vh-center container mx-auto px-4">
-          <div className="mx-auto w-full max-w-2xl text-center">
+          <div className="mx-auto w-full max-w-2xl text-center text-black dark:text-white">
             <motion.div
               variants={popIn}
               className="mx-auto inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/60 px-3 py-1 text-xs text-black/80 backdrop-blur dark:bg-white/10 dark:text-white/80"
@@ -96,7 +95,10 @@ export function Waitlist({
               </div>
             </motion.div>
 
-            <motion.h2 className="mt-6 text-3xl md:text-4xl font-extrabold tracking-tight" variants={fadeUp}>
+            <motion.h2
+              className="mt-6 text-3xl md:text-4xl font-extrabold tracking-tight text-black dark:text-white"
+              variants={fadeUp}
+            >
               {"You're on the Rise 🚀"}
             </motion.h2>
 

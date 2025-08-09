@@ -1,14 +1,16 @@
+import "server-only"
 import { NextResponse } from "next/server"
-
-// Tiny in-memory store for demo purposes
-type Entry = { email: string; role: "investor" | "talent" | "supporter"; ts: number }
-const g = globalThis as unknown as { __waitlist?: Entry[] }
-if (!g.__waitlist) g.__waitlist = []
+import { createWaitlistStore, isValidEmail, normalizeEmail, type WaitlistRole } from "@/lib/waitlist-store"
+import { isKVConfigured } from "@/lib/upstash"
 
 export async function GET() {
   try {
-    return NextResponse.json({ ok: true, count: g.__waitlist!.length })
-  } catch {
+    const store = createWaitlistStore()
+    const count = await store.getCount()
+    const backend = isKVConfigured() ? "kv" : "memory"
+    return NextResponse.json({ ok: true, count, backend })
+  } catch (err) {
+    console.error("GET /api/waitlist error:", err)
     return NextResponse.json({ ok: false }, { status: 500 })
   }
 }
@@ -16,19 +18,32 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     const data = await req.json()
-    const email: string | undefined = data?.email
-    const role: "investor" | "talent" | "supporter" | undefined = data?.role
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !role) {
-      return NextResponse.json({ ok: false, error: "invalid" }, { status: 400 })
+    const email: unknown = data?.email
+    const role: unknown = data?.role
+
+    if (typeof email !== "string" || !isValidEmail(email)) {
+      return NextResponse.json({ ok: false, error: "invalid-email" }, { status: 400 })
     }
-    const normalized = email.trim().toLowerCase()
-    const exists = g.__waitlist!.some((e) => e.email === normalized)
-    if (exists) {
-      return NextResponse.json({ ok: true, duplicate: true, count: g.__waitlist!.length }, { status: 409 })
+    if (role !== "investor" && role !== "talent" && role !== "supporter") {
+      return NextResponse.json({ ok: false, error: "invalid-role" }, { status: 400 })
     }
-    g.__waitlist!.push({ email: normalized, role, ts: Date.now() })
-    return NextResponse.json({ ok: true, count: g.__waitlist!.length }, { status: 201 })
-  } catch {
+
+    const store = createWaitlistStore()
+    const normalized = normalizeEmail(email)
+    const ts = Date.now()
+
+    const { created, count } = await store.addIfNotExists({
+      email: normalized,
+      role: role as WaitlistRole,
+      ts,
+    })
+
+    if (!created) {
+      return NextResponse.json({ ok: true, duplicate: true, count }, { status: 409 })
+    }
+    return NextResponse.json({ ok: true, count }, { status: 201 })
+  } catch (err) {
+    console.error("POST /api/waitlist error:", err)
     return NextResponse.json({ ok: false }, { status: 500 })
   }
 }
