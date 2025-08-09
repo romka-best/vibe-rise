@@ -1,0 +1,212 @@
+/// components/viberise/landing-page.tsx
+import { ScrollProgress } from "@/components/viberise/components/feedback/scroll-progress"
+import { Header } from "@/components/viberise/components/layout/header"
+import { Hero } from "@/components/viberise/components/sections/hero"
+import { ProblemSection } from "@/components/viberise/components/sections/problem"
+import { SolutionSection } from "@/components/viberise/components/sections/solution"
+import { HowItWorksSection } from "@/components/viberise/components/sections/how-it-works"
+import { ForWhomSection } from "@/components/viberise/components/sections/for-whom"
+import { FAQSection } from "@/components/viberise/components/sections/faq"
+import { WaitlistSection } from "@/components/viberise/components/sections/waitlist"
+import { SiteFooter } from "@/components/viberise/components/layout/site-footer"
+import { BackToTop } from "@/components/viberise/components/feedback/back-to-top"
+import { GlobalStyles } from "@/components/viberise/components/styles/global-styles"
+import { t, type Translations } from "@/components/viberise/components/content/translations"
+
+// components/viberise/components/sections/hero.tsx
+"use client"
+
+import { NeonBackground } from "../visuals/neon-background"
+import { FloatingCoins } from "../visuals/floating-coins"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { motion } from "framer-motion"
+import { sectionReveal, fadeUp, popIn } from "@/components/viberise/utils/motion-presets"
+
+export interface HeroProps {
+  reduced: boolean
+}
+
+export function Hero({ reduced }: HeroProps) {
+  return (
+    <motion.section
+      id="hero"
+      className="relative isolate overflow-hidden vh-hero"
+      variants={sectionReveal}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, margin: "-20% 0px" }}
+    >
+      <div aria-hidden="true" className="absolute inset-0 z-0 pointer-events-none">
+        <NeonBackground />
+      </div>
+
+      {!reduced && (
+        <div aria-hidden="true" className="absolute inset-0 z-10 pointer-events-none">
+          <FloatingCoins reduced={reduced} />
+        </div>
+      )}
+
+      {/* Grid-centered content, fills hero height */}
+      <div className="relative z-20 container mx-auto h-full px-4 grid place-items-center text-center">
+        <div className="mx-auto max-w-4xl text-center">
+          <motion.h1 className="text-4xl font-extrabold tracking-tight sm:text-6xl md:text-7xl" variants={fadeUp}>
+            <span className="block">{"Feel the Vibe."}</span>
+            <span className="block">{"Fuel the Rise."}</span>
+          </motion.h1>
+          <motion.p className="mt-4 max-w-2xl mx-auto text-lg text-black/70 dark:text-white/70" variants={fadeUp}>
+            {"The Most Valuable Asset on Earth? People"}
+          </motion.p>
+          <motion.div className="mt-8 inline-flex" variants={popIn} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
+            <Link href="#waitlist">
+              <Button className="bg-[var(--brand)] text-black hover:bg-[color:rgb(204,255,17,0.9)]">
+                {"Join Waitlist"}
+              </Button>
+            </Link>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Visual fade at bottom (does not affect layout) */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-32 bg-gradient-to-t from-white to-transparent dark:from-black"
+      />
+    </motion.section>
+  )
+}
+
+// components/viberise/components/sections/problem.tsx
+import { ImageCompare } from "../visuals/image-compare"
+
+export const ProblemSection = () => {
+  return (
+    <section id="problem" className="border-t border-black/10 dark:border-white/10 scroll-mt-[64px] md:scroll-mt-[72px]">
+      <ImageCompare />
+      {/* Problem content here */}
+    </section>
+  )
+}
+
+// components/viberise/components/sections/solution.tsx
+export const SolutionSection = () => {
+  return (
+    <section id="solution" className="border-t border-black/10 dark:border-white/10 scroll-mt-[64px] md:scroll-mt-[72px]">
+      {/* Solution content here */}
+    </section>
+  )
+}
+
+// components/viberise/components/sections/how-it-works.tsx
+export const HowItWorksSection = () => {
+  return (
+    <section id="how-it-works" className="border-t border-black/10 dark:border-white/10 scroll-mt-[64px] md:scroll-mt-[72px]">
+      {/* How it works content here */}
+    </section>
+  )
+}
+
+// components/viberise/components/sections/for-whom.tsx
+export const ForWhomSection = () => {
+  return (
+    <section id="for-whom" className="border-t border-black/10 dark:border-white/10 scroll-mt-[64px] md:scroll-mt-[72px]">
+      {/* For whom content here */}
+    </section>
+  )
+}
+
+// components/viberise/components/sections/faq.tsx
+export const FAQSection = () => {
+  return (
+    <section id="faq" className="border-t border-black/10 dark:border-white/10 scroll-mt-[64px] md:scroll-mt-[72px]">
+      {/* FAQ content here */}
+    </section>
+  )
+}
+
+// components/viberise/components/sections/waitlist.tsx
+export const WaitlistSection = () => {
+  return (
+    <section id="waitlist" className="border-t border-black/10 dark:border-white/10 scroll-mt-[64px] md:scroll-mt-[72px]">
+      {/* Waitlist content here */}
+    </section>
+  )
+}
+
+// app/not-found.tsx
+import { NeonBackground } from "@/components/viberise/components/visuals/neon-background"
+import { FloatingCoins } from "@/components/viberise/components/visuals/floating-coins"
+
+export const NotFoundPage = () => {
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <NeonBackground />
+      <FloatingCoins />
+      {/* Not found content here */}
+    </div>
+  )
+}
+
+// app/error.tsx
+import { NeonBackground } from "@/components/viberise/components/visuals/neon-background"
+import { FloatingCoins } from "@/components/viberise/components/visuals/floating-coins"
+
+export const ErrorPage = () => {
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <NeonBackground />
+      <FloatingCoins />
+      {/* Error content here */}
+    </div>
+  )
+}
+
+// components/viberise/components/styles/global-styles.tsx
+export function GlobalStyles() {
+  return (
+    <style jsx global>{`
+      :root {
+        --brand: #CCFF11;
+        --header-h: 64px; /* mobile header height */
+      }
+      html { scroll-behavior: smooth; }
+      @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+      @media (min-width: 768px) {
+        :root { --header-h: 72px; /* md+ header height */ }
+      }
+
+      /* Hero exact viewport height and centering */
+      .vh-hero {
+        height: calc(100svh - var(--header-h));
+        scroll-margin-top: var(--header-h);
+        display: grid;
+        place-items: center;
+      }
+      @supports not (height: 1svh) {
+        .vh-hero {
+          height: calc(100dvh - var(--header-h));
+        }
+      }
+
+      /* Section min-height and centering */
+      .vh-section {
+        min-height: calc(100svh - var(--header-h));
+        scroll-margin-top: var(--header-h);
+        display: grid;
+        place-items: center;
+      }
+      @supports not (height: 1svh) {
+        .vh-section {
+          min-height: calc(100dvh - var(--header-h));
+        }
+      }
+      .vh-section > .container { width: 100%; }
+
+      @keyframes dividerGlow {
+        0% { box-shadow: 0 0 12px rgba(204,255,17,0.6), 0 0 24px rgba(204,255,17,0.4); }
+        100% { box-shadow: 0 0 30px rgba(204,255,17,0.9), 0 0 60px rgba(204,255,17,0.6); }
+      }
+      .divider-glow { animation: dividerGlow 2.8s ease-in-out infinite alternate; }
+    `}</style>
+  )
+}
