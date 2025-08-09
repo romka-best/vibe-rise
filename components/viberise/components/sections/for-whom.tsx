@@ -21,11 +21,11 @@ export function ForWhom() {
       init: "AP",
     },
     {
-      name: "Maya K.",
+      name: "Dias",
       role: "Angel Investor",
       quote: "Backed 5 people early. Seeing measurable upside as they hit milestones.",
       img: "/thoughtful-investor.png",
-      init: "MK",
+      init: "DI",
     },
   ] as const
 
