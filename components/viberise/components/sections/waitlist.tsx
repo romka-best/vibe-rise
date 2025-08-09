@@ -1,12 +1,12 @@
 "use client"
 
 import * as React from "react"
+import Link from "next/link"
+import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { CheckCircle2, Users, BellRing, PartyPopper, ArrowLeft, Sparkles, AlertCircle } from "lucide-react"
-import { motion } from "framer-motion"
 import { sectionReveal, fadeUp, popIn, staggerRow } from "@/components/viberise/utils/motion-presets"
-import Link from "next/link"
 
 export interface WaitlistProps {
   role: "investor" | "talent" | "supporter" | null
@@ -118,18 +118,18 @@ export function Waitlist({
               variants={staggerRow(0.05)}
             >
               <motion.div variants={popIn} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
-                <Link href="#main" className="inline-flex">
-                  <Button className="bg-[var(--brand)] text-black hover:bg-[color:rgb(204,255,17,0.9)]">
+                <Link href="#main" className="inline-flex w-full sm:w-auto">
+                  <Button className="w-full sm:w-auto bg-[var(--brand)] text-black hover:bg-[color:rgb(204,255,17,0.9)]">
                     <ArrowLeft className="mr-2 h-4 w-4" />
                     {"Back Home"}
                   </Button>
                 </Link>
               </motion.div>
               <motion.div variants={popIn} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
-                <Link href="#how-it-works" className="inline-flex">
+                <Link href="#how-it-works" className="inline-flex w-full sm:w-auto">
                   <Button
                     variant="outline"
-                    className="border-white/15 bg-white/60 hover:bg-white/80 dark:border-white/15 dark:bg-white/10"
+                    className="w-full sm:w-auto border-white/15 bg-white/60 hover:bg-white/80 dark:border-white/15 dark:bg-white/10"
                   >
                     <PartyPopper className="mr-2 h-4 w-4" />
                     {"Explore how it works"}
@@ -137,11 +137,16 @@ export function Waitlist({
                 </Link>
               </motion.div>
               {onJoinAnother && (
-                <motion.div variants={popIn} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
+                <motion.div
+                  variants={popIn}
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full sm:w-auto"
+                >
                   <button
                     type="button"
                     onClick={onJoinAnother}
-                    className="inline-flex items-center justify-center rounded-md border border-black/10 bg-white/60 px-4 py-2 text-sm font-medium transition hover:bg-white/80 dark:border-white/15 dark:bg-white/10"
+                    className="w-full sm:w-auto inline-flex items-center justify-center rounded-md border border-black/10 bg-white/60 px-4 py-2 text-sm font-medium transition hover:bg-white/80 dark:border-white/15 dark:bg-white/10"
                   >
                     {"Join with another email"}
                   </button>
@@ -151,17 +156,17 @@ export function Waitlist({
           </div>
         </div>
         <style jsx>{`
-      .vh-center {
-        min-height: calc(100svh - var(--header-h));
-        display: grid;
-        place-items: center;
-      }
-      @supports not (height: 1svh) {
-        .vh-center {
-          min-height: calc(100dvh - var(--header-h));
-        }
-      }
-    `}</style>
+          .vh-center {
+            min-height: calc(100svh - var(--header-h));
+            display: grid;
+            place-items: center;
+          }
+          @supports not (height: 1svh) {
+            .vh-center {
+              min-height: calc(100dvh - var(--header-h));
+            }
+          }
+        `}</style>
       </motion.section>
     )
   }
@@ -175,7 +180,7 @@ export function Waitlist({
       whileInView="show"
       viewport={{ once: true, margin: "-20% 0px" }}
     >
-      <div className="container mx-auto min-h-full px-4 flex items-center">
+      <div className="container mx-auto min-h-full px-4">
         <div className="w-full">
           <div className="flex items-center justify-between gap-3">
             <motion.h2 className="text-3xl md:text-4xl font-bold" variants={fadeUp}>
@@ -269,7 +274,7 @@ export function Waitlist({
             <motion.div variants={popIn} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
               <Button
                 type="submit"
-                className="bg-[var(--brand)] text-black hover:bg-[color:rgb(204,255,17,0.9)] disabled:opacity-60"
+                className="w-full sm:w-auto bg-[var(--brand)] text-black hover:bg-[color:rgb(204,255,17,0.9)] disabled:opacity-60"
                 disabled={submitting}
               >
                 {submitting ? "Joining..." : "Join the Rise"}
@@ -313,28 +318,28 @@ export function Waitlist({
       </div>
 
       <style jsx>{`
-    @keyframes shake {
-      0%,
-      100% {
-        transform: translateX(0);
-      }
-      20% {
-        transform: translateX(-4px);
-      }
-      40% {
-        transform: translateX(4px);
-      }
-      60% {
-        transform: translateX(-3px);
-      }
-      80% {
-        transform: translateX(3px);
-      }
-    }
-    [data-animate="shake"] {
-      animation: shake 0.35s ease-in-out;
-    }
-  `}</style>
+        @keyframes shake {
+          0%,
+          100% {
+            transform: translateX(0);
+          }
+          20% {
+            transform: translateX(-4px);
+          }
+          40% {
+            transform: translateX(4px);
+          }
+          60% {
+            transform: translateX(-3px);
+          }
+          80% {
+            transform: translateX(3px);
+          }
+        }
+        [data-animate="shake"] {
+          animation: shake 0.35s ease-in-out;
+        }
+      `}</style>
     </motion.section>
   )
 }
