@@ -78,6 +78,20 @@ export function GlobalStyles() {
       .divider-glow {
         animation: dividerGlow 2.8s ease-in-out infinite alternate;
       }
+
+      /* Pointer cursor for actionable buttons */
+      button:not([disabled]),
+      [role="button"]:not([aria-disabled="true"]),
+      input[type="button"],
+      input[type="submit"] {
+        cursor: pointer;
+      }
+
+      /* Disabled states show a not-allowed cursor */
+      button[disabled],
+      [aria-disabled="true"] {
+        cursor: not-allowed;
+      }
     `}</style>
   )
 }
